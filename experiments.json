@@ -1,0 +1,23 @@
+{
+     "run_1": {
+         "latent_dim": 128,
+         "learning_rate": 0.0001,
+         "num_embeddings": 512,   
+          "embedding_dim":64,
+          "commitment_cost": 0.1,
+         "encoder_filters": [
+              32,
+              64
+
+         ],
+         "decoder_filters": [
+             64,
+             32
+         ],
+         "epochs": 150,
+         "batch_size": 64,
+         "patience": 15,
+         "early_stopping_interval": 2,
+         "min_epoch_to_start_saving": 5
+     }
+}
