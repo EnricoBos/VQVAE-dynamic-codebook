@@ -1,6 +1,6 @@
 # VQ-VAE for Face Image Reconstruction
 
-This repository implements a **Vector Quantized Variational Autoencoder (VQVAE)** for reconstructing facial images using the **LFW deepfunneled** dataset. The model includes advanced training features such as Exponential Moving Average (EMA) updates, dynamic commitment cost annealing, and dead code revival, all designed to enhance codebook utilization and reconstruction quality.
+This repository implements a **Vector Quantized Variational Autoencoder (VQVAE)** for reconstructing facial images using the **LFW deepfunneled** dataset. The model includes training features such as Exponential Moving Average (EMA) updates, dynamic commitment cost annealing, and dead code revival, all designed to enhance codebook utilization and reconstruction quality.
 
 ---
 
