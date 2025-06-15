@@ -1,6 +1,6 @@
 # VQ-VAE for High-Fidelity Face Image Reconstruction
 
-This repository implements a **Vector Quantized Variational Autoencoder (VQ-VAE)** for reconstructing low-resolution facial images using the **LFW deepfunneled** dataset. The model includes advanced training features such as Exponential Moving Average (EMA) updates, dynamic commitment cost annealing, and dead code revival, all designed to enhance codebook utilization and reconstruction quality.
+This repository implements a **Vector Quantized Variational Autoencoder (VQ-VAE)** for reconstructing facial images using the **LFW deepfunneled** dataset. The model includes advanced training features such as Exponential Moving Average (EMA) updates, dynamic commitment cost annealing, and dead code revival, all designed to enhance codebook utilization and reconstruction quality.
 
 ---
 
@@ -8,12 +8,12 @@ This repository implements a **Vector Quantized Variational Autoencoder (VQ-VAE)
 
 The project focuses on:
 - High-quality reconstruction of facial images from the **LFW deepfunneled** dataset using **VQ-VAE**
-- Comparing reconstruction quality against standard VAEs on low-resolution inputs
+- Comparing reconstruction quality against standard VAEs
 - A robust training pipeline featuring:
   - ✅ **Exponential Moving Average (EMA)** updates for the codebook (VQ-VAE v2 style)
   - ✅ **Adaptive commitment cost annealing** based on code usage
   - ✅ **Dead code revival** to prevent embedding collapse
-  - ✅ Extensive **image augmentation** for regularization and evaluation robustness
+  - ✅ **Image augmentation** for regularization and evaluation robustness
 
 ---
 
@@ -36,7 +36,7 @@ The project focuses on:
 - Pixel values are normalized to the range \([0, 1]\) by dividing by 255.
 
 ### 🔁 Data Augmentation
-To improve generalization and robustness, multiple **attribute-preserving augmentations** are applied to each image using `PIL`:
+To improve generalization and robustness, multiple augmentations steps preserving attrivute are applied to each image using `PIL`:
 - **Horizontal Flip**
 - **Brightness** adjustment (±20%)
 - **Contrast** variation (±30%)
@@ -48,7 +48,7 @@ To improve generalization and robustness, multiple **attribute-preserving augmen
 - **Gaussian Blur**
 - **Zoom-in** cropping (90% of the original image)
 
-Each augmented image preserves the core attributes of the original, enabling the model to learn invariant features while increasing data diversity.
+Each augmented image preserves the core attributes of the original!.
 
 ---
 
@@ -57,7 +57,7 @@ Each augmented image preserves the core attributes of the original, enabling the
 Install the required packages:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yaml
 ```
 
 Main dependencies:
@@ -75,8 +75,10 @@ Main dependencies:
 Set the mode in `vqvae_face_main.py`:
 
 ```python
-if __name__ == "__main__":
-    choice = 'train'
+def main():
+    
+    ### ENABLING TRAINING OR LOADING MODEL PERFORMING RECOSTRUCTION CHECK
+    enable_trainig = True
 ```
 
 - Loads and augments the dataset
@@ -89,8 +91,9 @@ if __name__ == "__main__":
 Set:
 
 ```python
-if __name__ == "__main__":
-    choice = 'eval'
+def main():
+    ### ENABLING TRAINING OR LOADING MODEL PERFORMING RECOSTRUCTION CHECK
+    enable_trainig = False
 ```
 
 - Loads the trained model and tokenized images
@@ -106,19 +109,27 @@ The quantization pipeline in this project includes two major mechanisms:
 The codebook embeddings are updated using an **Exponential Moving Average (EMA)** strategy rather than gradients. This makes training more stable and prevents code collapse by gradually integrating the encoder's outputs into the codebook.
 
 ### 🧪 Dead Code Revival
-Unused (dead) embeddings are periodically identified and reinitialized using slightly perturbed versions of active embeddings. This keeps the codebook fully utilized and avoids representational bottlenecks in the latent space.
+To prevent embedding collapse and ensure full codebook utilization, dead embeddings are periodically identified and revived.
+
+- A code is considered "dead" if its usage falls below a defined threshold.
+- Up to 5 dead codes per batch are replaced using noisy copies of active embeddings, allowing them to re-enter training gradually.
+- A fallback is included to reinitialize the entire codebook if all embeddings go inactive.
+- This strategy maintains a healthy distribution of latent representations and prevents the model from underutilizing its capacity.
 
 ---
 
 ## 🖼 Example Reconstructions
 
-| Original | Reconstructed (VQ-VAE) |
-|----------|------------------------|
-| ![o1](images_saved/processed_original_1.png) | ![r1](images_saved/recon_1.png) |
+| Original VS Reconstructed (VQ-VAE) |
+
+<img width="720" alt="original_vs_reconstructions_epoch" src="https://github.com/user-attachments/assets/d952c2d6-5042-46f0-a743-22e1b1d533e2" />
 
 ---
+
+## 📚 Reference
+This implementation was inspired in part by the official Keras VQ-VAE example:
+🔗 keras.io/examples/generative/vq_vae
 
 ## 👨‍💻 Author
 
 **Enrico Boscolo**  
-For questions, contributions, or collaboration, feel free to open an issue or contact me directly.
