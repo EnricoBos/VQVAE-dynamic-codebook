@@ -32,7 +32,7 @@ The project focuses on:
 ## 🧪 Data Processing
 
 ### 🖼️ Image Preprocessing
-- All images are cropped and resized to a consistent resolution suitable for model input.
+- All images are cropped and resized to a consistent resolution suitable for model input(and computational power avaibale).
 - Pixel values are normalized to the range \([0, 1]\) by dividing by 255.
 
 ### 🔁 Data Augmentation
