@@ -128,7 +128,7 @@ To prevent embedding collapse and ensure full codebook utilization, dead embeddi
 
 ## 📚 Reference
 This implementation was inspired in part by the official Keras VQ-VAE example:
-🔗 keras.io/examples/generative/vq_vae
+ keras.io/examples/generative/vq_vae
 
 ## 👨‍💻 Author
 
