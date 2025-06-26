@@ -9,7 +9,7 @@ This repository implements a **Vector Quantized Variational Autoencoder (VQVAE)*
 The project focuses on:
 - Good-quality reconstruction of facial images from the **LFW deepfunneled** dataset using **VQVAE**
 - Comparing reconstruction quality against standard VAEs
-- A robust training pipeline featuring:
+- A training pipeline with:
   - ✅ **Exponential Moving Average (EMA)** updates for the codebook 
   - ✅ **Adaptive commitment cost annealing** based on code usage
   - ✅ **Dead code revival** to prevent embedding collapse
