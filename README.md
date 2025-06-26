@@ -4,7 +4,7 @@ This repository implements a **Vector Quantized Variational Autoencoder (VQVAE)*
 
 ---
 
-## 🧠 Overview
+## Overview
 
 The project focuses on:
 - Good-quality reconstruction of facial images from the **LFW deepfunneled** dataset using **VQVAE**
@@ -29,13 +29,13 @@ The project focuses on:
 
 ---
 
-## 🧪 Data Processing
+## Data Processing
 
-### 🖼️ Image Preprocessing
+### Image Preprocessing
 - All images are cropped and resized to a consistent resolution suitable for model input(and computational power avaibale).
 - Pixel values are normalized to the range \([0, 1]\) by dividing by 255.
 
-### 🔁 Data Augmentation
+### Data Augmentation
 To improve generalization and robustness, multiple augmentations steps preserving attrivute are applied to each image using `PIL`:
 - **Horizontal Flip**
 - **Brightness** adjustment (±20%)
@@ -52,7 +52,7 @@ Each augmented image preserves the core attributes of the original!.
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 Install the required packages:
 
@@ -68,7 +68,7 @@ Main dependencies:
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Training
 
@@ -101,14 +101,14 @@ def main():
 
 ---
 
-## 🧠 Quantization Strategy
+## Quantization Strategy
 
 The quantization pipeline in this project includes two major mechanisms:
 
-### 🔁 EMA-Based Codebook Updates
+### EMA-Based Codebook Updates
 The codebook embeddings are updated using an **Exponential Moving Average (EMA)** strategy rather than gradients. This makes training more stable and prevents code collapse by gradually integrating the encoder's outputs into the codebook.
 
-### 🧪 Dead Code Revival
+### Dead Code Revival
 To prevent embedding collapse and ensure full codebook utilization, dead embeddings are periodically identified and revived.
 
 - A code is considered "dead" if its usage falls below a defined threshold.
@@ -118,7 +118,7 @@ To prevent embedding collapse and ensure full codebook utilization, dead embeddi
 
 ---
 
-## 🖼 Example Reconstructions
+## Example Reconstructions
 
 | Original VS Reconstructed (VQ-VAE) |
 
@@ -126,10 +126,10 @@ To prevent embedding collapse and ensure full codebook utilization, dead embeddi
 
 ---
 
-## 📚 Reference
+## Reference
 This implementation was inspired in part by the official Keras VQ-VAE example:
  keras.io/examples/generative/vq_vae
 
-## 👨‍💻 Author
+## Author
 
 **Enrico Boscolo**  
